@@ -13,6 +13,13 @@
 
   <%= render 'layouts/top_nav' %>
 
+  <% if session[:user_id] %>
+  <p>Welcome, <%= User.find(session[:user_id]).first_name %>! | <%= link_to 'Logout', logout_path, method: :delete %></p>
+<% else %>
+  <%= link_to 'Sign Up', signup_path %> | <%= link_to 'Login', login_path %>
+<% end %>
+
+
   <main class="container">
     <%= yield %>
   </main>
@@ -23,7 +30,7 @@
     <ul class="nav justify-content-center border-bottom pb-3 mb-3">
       <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">FAQ</a></li>
       <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Help</a></li>
-      <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">About</a></li>
+      <li class="nav-item"><%= link_to 'About Us', about_path, class: "nav-link" %></li>
     </ul>
     <p class="text-center text-muted">© 2021 Jungle, Inc</p>
   </footer>
